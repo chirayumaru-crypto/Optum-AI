@@ -1,0 +1,170 @@
+{
+  "command": "present_jcc",
+  "timestamp": "2025-12-29T16:41:36.889252",
+  "session_id": "exam_P001_20251229",
+  "step": "6",
+  "substep": "6.2",
+  "eye": "OS",
+  "current_prescription": {
+    "SPH": 0.0,
+    "CYL": 0.0,
+    "AXIS": 0
+  },
+  "test_sequence": [
+    {
+      "sequence_number": 1,
+      "test_type": "axis_horizontal",
+      "axis": "horizontal",
+      "question": "Looking at these two axis positions, which one is clearer?",
+      "options": ["Position 1 (horizontal)", "Position 2 (horizontal)", "Both same", "Neither clear"],
+      "lens_positions": {
+        "position_1": {"SPH": 0.0, "CYL": -0.25, "AXIS": 180},
+        "position_2": {"SPH": 0.0, "CYL": -0.25, "AXIS": 175}
+      }
+    },
+    {
+      "sequence_number": 2,
+      "test_type": "axis_vertical",
+      "axis": "vertical",
+      "question": "Now looking at the vertical positions, which is clearer?",
+      "options": ["Position 1 (vertical)", "Position 2 (vertical)", "Both same", "Neither clear"],
+      "lens_positions": {
+        "position_1": {"SPH": 0.0, "CYL": -0.25, "AXIS": 175},
+        "position_2": {"SPH": 0.0, "CYL": -0.25, "AXIS": 170}
+      }
+    },
+    {
+      "sequence_number": 3,
+      "test_type": "duochrome",
+      "duochrome": true,
+      "question": "Which color appears clearer - red or green? Or are they equal?",
+      "options": ["Red clearer", "Green clearer", "Both equal", "Neither clear"],
+      "lens_positions": {
+        "red_filter": {"SPH": 0.0, "CYL": -0.25, "AXIS": 172},
+        "green_filter": {"SPH": -0.25, "CYL": -0.25, "AXIS": 172}
+      }
+    }
+  ],
+  "patient_responses": [
+    {
+      "sequence_number": 1,
+      "test_type": "axis_horizontal",
+      "raw_response": "Position 1 looks clearer to me",
+      "timestamp": "2025-12-29T16:41:42.156789",
+      "response_time_ms": 5789,
+      "selected_option": "Position 1 (horizontal)",
+      "option_index": 1,
+      "confidence": 0.82,
+      "intent": "refraction_feedback",
+      "sentiment": "Confident",
+      "sentiment_score": 0.80,
+      "red_flag": false,
+      "response_quality": "clear"
+    },
+    {
+      "sequence_number": 2,
+      "test_type": "axis_vertical",
+      "raw_response": "Hmm, they're pretty much the same",
+      "timestamp": "2025-12-29T16:41:48.234567",
+      "response_time_ms": 5234,
+      "selected_option": "Both same",
+      "option_index": 3,
+      "confidence": 0.45,
+      "intent": "refraction_feedback",
+      "sentiment": "Uncertain",
+      "sentiment_score": 0.40,
+      "red_flag": false,
+      "response_quality": "ambiguous"
+    },
+    {
+      "sequence_number": 3,
+      "test_type": "duochrome",
+      "raw_response": "Red looks a tiny bit clearer",
+      "timestamp": "2025-12-29T16:41:54.345678",
+      "response_time_ms": 6345,
+      "selected_option": "Red clearer",
+      "option_index": 1,
+      "confidence": 0.65,
+      "intent": "refraction_feedback",
+      "sentiment": "Uncertain",
+      "sentiment_score": 0.55,
+      "red_flag": false,
+      "response_quality": "ambiguous"
+    }
+  ],
+  "clinical_analysis": {
+    "axis_horizontal_finding": {
+      "status": "CLEAR",
+      "patient_preference": "Position 1",
+      "confidence": 0.82,
+      "interpretation": "Patient strongly prefers horizontal axis at 180°"
+    },
+    "axis_vertical_finding": {
+      "status": "AMBIGUOUS",
+      "patient_preference": "Both same",
+      "confidence": 0.45,
+      "interpretation": "Patient uncertain between 175° and 170°. Need to repeat or accept axis at 175° from horizontal test."
+    },
+    "duochrome_finding": {
+      "status": "AMBIGUOUS",
+      "patient_preference": "Red clearer",
+      "confidence": 0.65,
+      "interpretation": "Patient slightly prefers red, suggesting sphere may be slightly under-corrected. Minimal adjustment suggested."
+    }
+  },
+  "phoropter_control": {
+    "primary_actions": [
+      {
+        "sequence": 1,
+        "action": "confirm_axis",
+        "parameter": "AXIS",
+        "eye": "OS",
+        "current_value": 0,
+        "decision_value": 180,
+        "reason": "Patient clearly prefers horizontal axis position 1 (AXIS 180)"
+      },
+      {
+        "sequence": 2,
+        "action": "repeat_axis_test",
+        "parameter": "AXIS",
+        "eye": "OS",
+        "reason": "Patient ambiguous between 175° and 170°. Confidence 0.45 < 0.6. Repeat presentation or accept 175° from horizontal test."
+      },
+      {
+        "sequence": 3,
+        "action": "adjust_sphere_slight",
+        "parameter": "SPH",
+        "eye": "OS",
+        "adjustment": {
+          "direction": "negative",
+          "magnitude": -0.125,
+          "reason": "Patient slightly prefers red in duochrome test, suggesting mild under-correction. Add -0.125D sphere."
+        }
+      }
+    ],
+    "final_recommendation": {
+      "action": "accept_jcc_results",
+      "new_prescription": {
+        "SPH": -0.125,
+        "CYL": -0.25,
+        "AXIS": 180
+      },
+      "confidence": "HIGH",
+      "next_step": "6.3"
+    }
+  },
+  "audit_trail": {
+    "processed_by": "AIOptumLLMEngine",
+    "steering_layers_applied": [
+      "intent_extraction",
+      "sentiment_analysis",
+      "confidence_evaluation",
+      "red_flag_detection"
+    ],
+    "total_responses_captured": 3,
+    "clear_responses": 1,
+    "ambiguous_responses": 2,
+    "validation_passed": true,
+    "processing_time_ms": 24
+  }
+}

@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# Data and Models
+*.pt
+*.csv
+exam_records/
+logs/
+
+# Debug and Temp files
+intel_*.txt
+test_*.txt
+*.log
+test_log.txt
+test_success.txt
+test_out.txt
+test_fix.txt
+test_results.txt
+test_final.txt
+intel_debug.txt
+intel_error.txt
+intel_final.txt
+intel_results.txt
+
+# Secrets
+.env
+config.yaml.bak
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,66 @@
+{
+  "command": "present_lens_pair",
+  "timestamp": "2025-12-29T16:23:35.946560",
+  "session_id": "exam_P001_20251229",
+  "step": "6",
+  "substep": "6.1",
+  "eye": "OS",
+  "lens_pair": {
+    "lens_1": {
+      "SPH": -0.25,
+      "CYL": 0,
+      "AXIS": 0
+    },
+    "lens_2": {
+      "SPH": 0.0,
+      "CYL": 0,
+      "AXIS": 0
+    }
+  },
+  "question": "Which lens makes the dot sharper and rounder?",
+  "options": [
+    "First lens",
+    "Second lens",
+    "Both same",
+    "Neither clear"
+  ],
+  "presentation_metadata": {
+    "duration_ms": 5000,
+    "distance": "20 feet",
+    "illumination": "optimal",
+    "patient_position": "stable"
+  },
+  "patient_response": {
+    "raw_response": "The second lens is better, definitely sharper",
+    "timestamp": "2025-12-29T16:23:42.156789",
+    "response_time_ms": 6210,
+    "selected_option": "Second lens",
+    "option_index": 2,
+    "confidence": 0.88,
+    "intent": "refraction_feedback",
+    "sentiment": "Confident",
+    "sentiment_score": 0.85,
+    "red_flag": false,
+    "persona_override_detected": false,
+    "response_quality": "clear"
+  },
+  "processing_result": {
+    "status": "success",
+    "phoropter_action": "adjust_sphere_negative",
+    "adjustment_magnitude": -0.25,
+    "next_step": "6.2",
+    "decision_reason": "Patient clearly prefers second lens (SPH 0.0) over first lens (SPH -0.25). Adjust sphere negative by 0.25D."
+  },
+  "audit_trail": {
+    "processed_by": "AIOptumLLMEngine",
+    "steering_layers_applied": [
+      "vector_steering",
+      "persona_override_check",
+      "intent_extraction",
+      "sentiment_analysis",
+      "red_flag_detection"
+    ],
+    "validation_passed": true,
+    "processing_time_ms": 12
+  }
+}
