@@ -638,7 +638,7 @@ A licensed optometrist must review all results before any prescription is issued
 
 ## Contributors
 
-- **Concept & Design:** Chirayu Marwah
+- **Concept & Design:** Chirayu Maru
 - **Implementation:** AI Assistant (Claude Haiku 4.5)
 - **Date:** December 29, 2025
 
